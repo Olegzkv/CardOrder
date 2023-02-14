@@ -18,13 +18,16 @@ public class CardOrderTest {
     public void openPage() {
         open("http://localhost:9999/");
     }
+    public String generateDate(long addDays, String pattern) {
+        return LocalDate.now().plusDays(addDays).format(DateTimeFormatter.ofPattern(pattern));
+    }
 
     @Test
     void shouldCheckCorrectForm() {
 
         $x("//input[@placeholder=\"Город\"]").val("Москва");
         $x("//input[@type=\"tel\"]").doubleClick().sendKeys(Keys.DELETE);
-        String meetingDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        String meetingDate = generateDate (3,"dd.MM.yyyy");
         $x("//input[@placeholder=\"Дата встречи\"]").val(meetingDate);
         $("[data-test-id='name'] input").val("Иван Петров");
         $("[data-test-id='phone'] input").val("+79112443030");
@@ -40,7 +43,7 @@ public class CardOrderTest {
 
         $x("//input[@placeholder=\"Город\"]").val("Мюнхен");
         $x("//input[@type=\"tel\"]").doubleClick().sendKeys(Keys.DELETE);
-        String meetingDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        String meetingDate = generateDate (3,"dd.MM.yyyy");
         $x("//input[@placeholder=\"Дата встречи\"]").val(meetingDate);
         $("[data-test-id='name'] input").val("Иван Петров");
         $("[data-test-id='phone'] input").val("+79112443030");
@@ -54,7 +57,7 @@ public class CardOrderTest {
     void shouldCheckNameEmpty() {
         $x("//input[@placeholder=\"Город\"]").val("Москва");
         $x("//input[@type=\"tel\"]").doubleClick().sendKeys(Keys.DELETE);
-        String meetingDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        String meetingDate = generateDate (3,"dd.MM.yyyy");
         $x("//input[@placeholder=\"Дата встречи\"]").val(meetingDate);
         $("[data-test-id='name'] input").val("");
         $("[data-test-id='phone'] input").val("+79112443030");
@@ -68,7 +71,7 @@ public class CardOrderTest {
     void shouldCheckInvalidName() {
         $x("//input[@placeholder=\"Город\"]").val("Москва");
         $x("//input[@type=\"tel\"]").doubleClick().sendKeys(Keys.DELETE);
-        String meetingDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        String meetingDate = generateDate (3,"dd.MM.yyyy");
         $x("//input[@placeholder=\"Дата встречи\"]").val(meetingDate);
         $("[data-test-id='name'] input").val("Ivan Petrov");
         $("[data-test-id='phone'] input").val("+79112443030");
@@ -82,7 +85,7 @@ public class CardOrderTest {
     void shouldCheckInvalidDate() {
         $x("//input[@placeholder=\"Город\"]").val("Москва");
         $x("//input[@type=\"tel\"]").doubleClick().sendKeys(Keys.DELETE);
-        String meetingDate = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        String meetingDate = generateDate (1,"dd.MM.yyyy");
         $x("//input[@placeholder=\"Дата встречи\"]").val(meetingDate);
         $("[data-test-id='name'] input").val("");
         $("[data-test-id='phone'] input").val("+79112443030");
@@ -96,7 +99,7 @@ public class CardOrderTest {
     void shouldCheckInvalidPhone() {
         $x("//input[@placeholder=\"Город\"]").val("Москва");
         $x("//input[@type=\"tel\"]").doubleClick().sendKeys(Keys.DELETE);
-        String meetingDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        String meetingDate = generateDate (3,"dd.MM.yyyy");
         $x("//input[@placeholder=\"Дата встречи\"]").val(meetingDate);
         $("[data-test-id='name'] input").val("Иван Петров");
         $("[data-test-id='phone'] input").val("+7911120");
@@ -110,7 +113,7 @@ public class CardOrderTest {
     void shouldCheckEmptyPhone() {
         $x("//input[@placeholder=\"Город\"]").val("Москва");
         $x("//input[@type=\"tel\"]").doubleClick().sendKeys(Keys.DELETE);
-        String meetingDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        String meetingDate = generateDate (3,"dd.MM.yyyy");
         $x("//input[@placeholder=\"Дата встречи\"]").val(meetingDate);
         $("[data-test-id='name'] input").val("Иван Петров");
         $("[data-test-id='phone'] input").val("");
@@ -124,7 +127,7 @@ public class CardOrderTest {
     void shouldMissClickAgreement() {
         $x("//input[@placeholder=\"Город\"]").val("Москва");
         $x("//input[@type=\"tel\"]").doubleClick().sendKeys(Keys.DELETE);
-        String meetingDate = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+        String meetingDate = generateDate (3,"dd.MM.yyyy");
         $x("//input[@placeholder=\"Дата встречи\"]").val(meetingDate);
         $("[data-test-id='name'] input").val("Иван Петров");
         $("[data-test-id='phone'] input").val("+79112443030");
